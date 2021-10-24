@@ -4,13 +4,13 @@
       <v-col cols="12">
         <div class="d-flex align-center pb-5 pt-5 wrap">
           <v-col cols="8" class="d-flex align-center justify-center">
-            <div class="" v-if="!isBusy">
+            <div class="">
               <div>
                 <span v-for="(col, index) in row1" :key="index">
                   <input
-                    :value="col"
                     class="tile secondary--text"
                     type="number"
+                    v-model="row1[index]"
                   />
                   <span v-if="index == 2 || index == 5"
                     >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span
@@ -20,9 +20,9 @@
               <div>
                 <span v-for="(col, index) in row2" :key="index">
                   <input
-                    :value="col"
                     class="tile secondary--text"
                     type="number"
+                    v-model="row2[index]"
                   />
                   <span v-if="index == 2 || index == 5"
                     >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span
@@ -32,9 +32,9 @@
               <div>
                 <span v-for="(col, index) in row3" :key="index">
                   <input
-                    :value="col"
                     class="tile secondary--text"
                     type="number"
+                    v-model="row3[index]"
                   />
                   <span v-if="index == 2 || index == 5"
                     >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span
@@ -46,9 +46,9 @@
               <div>
                 <span v-for="(col, index) in row4" :key="index">
                   <input
-                    :value="col"
                     class="tile secondary--text"
                     type="number"
+                    v-model="row4[index]"
                   />
 
                   <span v-if="index == 2 || index == 5"
@@ -59,9 +59,9 @@
               <div>
                 <span v-for="(col, index) in row5" :key="index">
                   <input
-                    :value="col"
                     class="tile secondary--text"
                     type="number"
+                    v-model="row5[index]"
                   />
                   <span v-if="index == 2 || index == 5"
                     >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span
@@ -71,9 +71,9 @@
               <div>
                 <span v-for="(col, index) in row6" :key="index">
                   <input
-                    :value="col"
                     class="tile secondary--text"
                     type="number"
+                    v-model="row6[index]"
                   />
                   <span v-if="index == 2 || index == 5"
                     >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span
@@ -86,9 +86,9 @@
               <div>
                 <span v-for="(col, index) in row7" :key="index">
                   <input
-                    :value="col"
                     class="tile secondary--text"
                     type="number"
+                    v-model="row7[index]"
                   />
                   <span v-if="index == 2 || index == 5"
                     >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span
@@ -98,9 +98,9 @@
               <div>
                 <span v-for="(col, index) in row8" :key="index">
                   <input
-                    :value="col"
                     class="tile secondary--text"
                     type="number"
+                    v-model="row8[index]"
                   />
                   <span v-if="index == 2 || index == 5"
                     >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span
@@ -110,9 +110,9 @@
               <div>
                 <span v-for="(col, index) in row9" :key="index">
                   <input
-                    :value="col"
                     class="tile secondary--text"
                     type="number"
+                    v-model="row9[index]"
                   />
                   <span v-if="index == 2 || index == 5"
                     >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span
@@ -152,7 +152,8 @@
                 <v-btn
                   x-large
                   outlined
-                  @click="solve()"
+                  disabled
+                  @click="solveNext()"
                   class="secondary--text btn"
                   >Solve next number</v-btn
                 >
@@ -176,54 +177,35 @@
 export default {
   name: 'Sudoku',
 
-  data: () => ({
-    // example: [
-    //   [null, null, null, null, null, null, null, null, null],
-    //   [null, null, null, null, null, null, null, null, null],
-    //   [null, null, null, null, null, null, null, null, null],
-    //   [null, null, null, null, null, null, null, null, null],
-    //   [null, null, null, null, null, null, null, null, null],
-    //   [null, null, null, null, null, null, null, null, null],
-    //   [null, null, null, null, null, null, null, null, null],
-    //   [null, null, null, null, null, null, null, null, null],
-    //   [null, null, null, null, null, null, null, null, null],
-    // ],
-    // skeleton: [
-    //   [5, 3, null, null, 7, null, null, null, null],
-    //   [6, null, null, 1, 9, 5, null, null, null],
-    //   [null, 9, 8, null, null, null, null, 6, null],
-    //   [8, null, null, null, 6, null, null, null, 3],
-    //   [4, null, null, 8, 0, 3, null, null, 1],
-    //   [7, null, null, null, 2, null, null, null, 6],
-    //   [null, 6, null, null, null, null, 2, 8, null],
-    //   [null, null, null, 4, 1, 9, null, null, 5],
-    //   [null, null, null, null, 8, null, null, 7, 9],
-    // ],
-    /*
-    row1: [5, 3, null, null, 7, null, null, null, null],
-    row2: [6, null, null, 1, 9, 5, null, null, null],
-    row3: [null, 9, 8, null, null, null, null, 6, null],
-    row4: [8, null, null, null, 6, null, null, null, 3],
-    row5: [4, null, null, 8, 0, 3, null, null, 1],
-    row6: [7, null, null, null, 2, null, null, null, 6],
-    row7: [null, 6, null, null, null, null, 2, 8, null],
-    row8: [null, null, null, 4, 1, 9, null, null, 5],
-    row9: [null, null, null, null, 8, null, null, 7, 9],
-    */
-    isBusy: false,
-  }),
+  data: () => ({}),
 
   computed: {
-    skeleton() {
-      return this.$store.getters.skeleton;
+    example() {
+      return this.$store.getters.example;
     },
+    // /*
+    skeleton() {
+      return [
+        this.row1,
+        this.row2,
+        this.row3,
+        this.row4,
+        this.row5,
+        this.row6,
+        this.row7,
+        this.row8,
+        this.row9,
+      ];
+      // return this.$store.getters.skeleton;
+    },
+
     row1: {
       get: function() {
         return this.$store.getters.skeleton[0];
       },
       set: function(newValue) {
+        console.log(newValue);
         this.$store.getters.skeleton[0] = newValue;
-        this.$skeleton;
       },
     },
     row2: {
@@ -231,6 +213,7 @@ export default {
         return this.$store.getters.skeleton[1];
       },
       set: function(newValue) {
+        console.log(newValue);
         this.$store.getters.skeleton[1] = newValue;
       },
     },
@@ -239,6 +222,7 @@ export default {
         return this.$store.getters.skeleton[2];
       },
       set: function(newValue) {
+        console.log(newValue);
         this.$store.getters.skeleton[2] = newValue;
       },
     },
@@ -247,6 +231,7 @@ export default {
         return this.$store.getters.skeleton[3];
       },
       set: function(newValue) {
+        console.log(newValue);
         this.$store.getters.skeleton[3] = newValue;
       },
     },
@@ -255,6 +240,7 @@ export default {
         return this.$store.getters.skeleton[4];
       },
       set: function(newValue) {
+        console.log(newValue);
         this.$store.getters.skeleton[4] = newValue;
       },
     },
@@ -263,6 +249,7 @@ export default {
         return this.$store.getters.skeleton[5];
       },
       set: function(newValue) {
+        console.log(newValue);
         this.$store.getters.skeleton[5] = newValue;
       },
     },
@@ -271,6 +258,7 @@ export default {
         return this.$store.getters.skeleton[6];
       },
       set: function(newValue) {
+        console.log(newValue);
         this.$store.getters.skeleton[6] = newValue;
       },
     },
@@ -279,6 +267,7 @@ export default {
         return this.$store.getters.skeleton[7];
       },
       set: function(newValue) {
+        console.log(newValue);
         this.$store.getters.skeleton[7] = newValue;
       },
     },
@@ -287,42 +276,28 @@ export default {
         return this.$store.getters.skeleton[8];
       },
       set: function(newValue) {
+        console.log(newValue);
         this.$store.getters.skeleton[8] = newValue;
       },
     },
+    // */
   },
 
   methods: {
     reset() {
-      this.assignToRows(this.example);
+      this.$store.dispatch('setSkeleton', this.example);
     },
     solve() {
-      this.isBusy = true;
+      for (let i = 0; i < this.skeleton.length; i++) {
+        for (let j = 0; j < this.skeleton[i].length; j++) {
+          if (this.skeleton[i][j] != null) {
+            this.skeleton[i][j] = parseInt(this.skeleton[i][j]);
+          }
+        }
+      }
       const board = this.isSolved(this.skeleton) ? this.skeleton : null;
       console.log(board);
       this.$store.dispatch('setSkeleton', board);
-      this.row1 = board[0];
-      this.row2 = board[1];
-      this.row3 = board[2];
-      this.row4 = board[3];
-      this.row5 = board[4];
-      this.row6 = board[5];
-      this.row7 = board[6];
-      this.row8 = board[7];
-      this.row9 = board[8];
-
-      setTimeout(() => {
-        this.isBusy = false;
-      }, 100);
-      // this.$store.getters.skeleton[0] = board[0];
-      // this.$store.getters.skeleton[1] = board[1];
-      // this.$store.getters.skeleton[2] = board[2];
-      // this.$store.getters.skeleton[3] = board[3];
-      // this.$store.getters.skeleton[4] = board[4];
-      // this.$store.getters.skeleton[5] = board[5];
-      // this.$store.getters.skeleton[6] = board[6];
-      // this.$store.getters.skeleton[7] = board[7];
-      // this.$store.getters.skeleton[8] = board[8];
     },
 
     findZero(board) {
@@ -330,7 +305,7 @@ export default {
         for (let j = 0; j < 9; j++) {
           let col = board[i][j];
 
-          if (col == null) {
+          if (!col) {
             return { x: i, y: j };
           }
         }

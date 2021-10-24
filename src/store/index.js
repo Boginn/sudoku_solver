@@ -32,6 +32,9 @@ export default new Vuex.Store({
     skeleton(state) {
       return state.skeleton;
     },
+    example(state) {
+      return state.example;
+    },
   },
   actions: {
     setSkeleton(context, payload) {

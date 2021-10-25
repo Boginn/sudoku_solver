@@ -194,7 +194,7 @@
                 <v-btn
                   x-large
                   outlined
-                  @click="solve()"
+                  @click="scan()"
                   class="primary--text btn"
                   >Solve Sudoku</v-btn
                 >
@@ -355,6 +355,24 @@ export default {
       ];
       this.$store.dispatch('setCurrentBoard', empty);
     },
+    scan() {
+      let scanBoard = this.parseBoard(this.currentBoard);
+      let valuesAlreadySeen = [];
+
+      for (let i = 0; i < scanBoard.length; i++) {
+        for (let j = 0; j < scanBoard.length; j++) {
+          let value = scanBoard[i][j];
+          console.log(value);
+          if (valuesAlreadySeen.indexOf(value) !== -1) {
+            this.showMessage();
+            return;
+          }
+          valuesAlreadySeen.push(value);
+        }
+      }
+
+      this.solve();
+    },
     solve() {
       this.parseBoard(this.currentBoard);
       const board = this.isSolved(this.currentBoard) ? this.currentBoard : null;
@@ -507,15 +525,15 @@ export default {
     },
     setExample2() {
       const example = [
-        [null, null, null, null, null, null, null, null, 9],
-        [null, null, null, null, null, 7, null, 1, null],
-        [7, 6, null, 9, null, null, 3, null, 8],
-        [null, null, 1, 6, null, null, 4, 3, null],
-        [null, null, null, null, null, null, null, null, 6],
-        [null, 5, null, null, 7, null, null, 8, null],
-        [null, null, 3, null, null, 1, null, 2, null],
-        [9, 1, null, null, null, 3, null, null, null],
-        [null, null, null, null, null, 5, 1, 9, null],
+        [null, null, 9, 1, 3, null, 6, null, null],
+        [null, null, 2, 5, 9, null, null, null, null],
+        [null, 5, 8, null, 6, null, 2, null, null],
+        [1, null, null, null, null, 7, null, null, 6],
+        [null, null, null, null, null, null, null, 2, null],
+        [null, 2, null, null, null, 3, null, 7, 9],
+        [4, null, null, null, null, null, 9, 6, null],
+        [null, 7, null, null, null, null, null, null, 5],
+        [9, 8, 1, 2, null, null, null, 3, 7],
       ];
       this.$store.dispatch('setCurrentBoard', example);
     },
@@ -539,7 +557,7 @@ export default {
 
 <style>
 .border {
-  border: 1px solid white;
+  border: 1px solid #9876aa;
 }
 .font-shadow {
   text-shadow: black 1px 1px;
@@ -559,7 +577,7 @@ select {
   height: 42px;
   margin: 4px;
   display: inline-block;
-  border: 1px solid #9876aa;
+  border: 1px solid white;
   border-radius: 4px;
   box-sizing: border-box;
 }

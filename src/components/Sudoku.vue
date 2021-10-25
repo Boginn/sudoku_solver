@@ -188,6 +188,9 @@
             </v-row>
             <v-row>
               <v-col>
+                <p class="secondary--text" v-if="isMessage">No Solution!</p>
+                <p class="secondary--text" v-else>&nbsp;</p>
+
                 <v-btn
                   x-large
                   outlined
@@ -223,7 +226,9 @@
 export default {
   name: 'Sudoku',
 
-  data: () => ({}),
+  data: () => ({
+    isMessage: false,
+  }),
 
   computed: {
     // /*
@@ -330,6 +335,12 @@ export default {
   },
 
   methods: {
+    showMessage() {
+      this.isMessage = true;
+      setTimeout(() => {
+        this.isMessage = false;
+      }, 3000);
+    },
     clear() {
       const empty = [
         [null, null, null, null, null, null, null, null, null],
@@ -347,8 +358,11 @@ export default {
     solve() {
       this.parseBoard(this.currentBoard);
       const board = this.isSolved(this.currentBoard) ? this.currentBoard : null;
-
-      this.$store.dispatch('setCurrentBoard', board);
+      if (board != null) {
+        this.$store.dispatch('setCurrentBoard', board);
+      } else {
+        this.showMessage();
+      }
       console.log(board);
     },
     solveNext() {

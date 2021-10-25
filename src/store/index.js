@@ -5,18 +5,9 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    example: [
-      [null, null, null, null, null, null, null, null, null],
-      [null, null, null, null, null, null, null, null, null],
-      [null, null, null, null, null, null, null, null, null],
-      [null, null, null, null, null, null, null, null, null],
-      [null, null, null, null, null, null, null, null, null],
-      [null, null, null, null, null, null, null, null, null],
-      [null, null, null, null, null, null, null, null, null],
-      [null, null, null, null, null, null, null, null, null],
-      [null, null, null, null, null, null, null, null, null],
-    ],
-    skeleton: [
+    // update: false,
+    saved: undefined,
+    currentBoard: [
       [5, 3, null, null, 7, null, null, null, null],
       [6, null, null, 1, 9, 5, null, null, null],
       [null, 9, 8, null, null, null, null, 6, null],
@@ -29,21 +20,39 @@ export default new Vuex.Store({
     ],
   },
   getters: {
-    skeleton(state) {
-      return state.skeleton;
+    currentBoard(state) {
+      return state.currentBoard;
     },
-    example(state) {
-      return state.example;
+    saved(state) {
+      return state.saved;
     },
+
+    // update(state) {
+    //   return state.update;
+    // },
   },
   actions: {
-    setSkeleton(context, payload) {
-      context.commit('SET_SKELETON', payload);
+    setCurrentBoard(context, payload) {
+      context.commit('SET_CURRENT_BOARD', payload);
     },
+    setSaved(context, payload) {
+      context.commit('SET_SAVED', payload);
+    },
+    // update(context) {
+    //   context.commit('UPDATE');
+    // },
   },
   mutations: {
-    SET_SKELETON(state, payload) {
-      state.skeleton = payload;
+    SET_CURRENT_BOARD(state, payload) {
+      console.log(payload);
+      state.currentBoard = payload;
+    },
+    SET_SAVED(state, payload) {
+      console.log(payload);
+      state.saved = payload;
+    },
+    UPDATE(state) {
+      state.update = !state.update;
     },
   },
   modules: {},

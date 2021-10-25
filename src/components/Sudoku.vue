@@ -356,16 +356,17 @@ export default {
       this.$store.dispatch('setCurrentBoard', empty);
     },
     scan() {
-      let scanBoard = this.parseBoard(this.currentBoard);
-      let valuesAlreadySeen = [];
+      let board = this.parseBoard(this.currentBoard);
 
-      for (let i = 0; i < scanBoard.length; i++) {
-        for (let j = 0; j < scanBoard.length; j++) {
-          let value = scanBoard[i][j];
-          console.log(value);
-          if (valuesAlreadySeen.indexOf(value) !== -1) {
-            this.showMessage();
-            return;
+      for (let i = 0; i < board.length; i++) {
+        let valuesAlreadySeen = [];
+        for (let j = 0; j < board.length; j++) {
+          let value = board[i][j];
+          if (value != null) {
+            if (valuesAlreadySeen.indexOf(value) >= 0) {
+              this.showMessage();
+              return;
+            }
           }
           valuesAlreadySeen.push(value);
         }

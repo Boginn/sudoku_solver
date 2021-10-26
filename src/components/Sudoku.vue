@@ -17,15 +17,15 @@
       </v-col>
     </v-row>
     <v-row class="text-center mt-1">
-      <v-col cols="12">
+      <v-col>
         <div class="d-flex align-center justify-center pb-5 pt-5 ">
           <v-col
             lg="6"
             sm="12"
             class="d-flex pt-6 pb-6 ma-1 align-center justify-center border"
           >
-            <div class="">
-              <div>
+            <div>
+              <div style="white-space: nowrap">
                 <span v-for="(col, index) in row1" :key="index">
                   <input
                     maxLength="1"

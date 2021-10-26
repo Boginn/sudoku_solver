@@ -598,11 +598,11 @@ export default {
 }
 input[type='text'],
 select {
-  font-size: 24pt;
+  font-size: 20pt;
   text-align: center;
   padding: 10px;
-  width: 42px;
-  height: 42px;
+  width: 35px;
+  height: 35px;
   margin: 4px;
   display: inline-block;
   border: 1px solid white;

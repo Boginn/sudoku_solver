@@ -1,21 +1,5 @@
 <template>
   <v-container>
-    <v-row class="d-flex text-center">
-      <v-col>
-        <h1 class="display-2  mt-3 ">
-          <span class="primary--text font-shadow font-weight-bold">
-            Sudoku
-          </span>
-          <span class="secondary--text font-shadow font-weight-bold">
-            Solver
-          </span>
-        </h1>
-
-        <p class="subheading font-weight-regular">
-          Input the numbers you have and the solver will do the rest.
-        </p>
-      </v-col>
-    </v-row>
     <v-row class="text-center mt-1">
       <v-col>
         <div class="d-flex align-center justify-center pb-5 pt-5 ">
@@ -160,7 +144,7 @@
             </div>
           </v-col>
 
-          <!-- <v-col lg="4" sm="12" class="ma-1 ">
+          <v-col lg="4" sm="12" class="ma-1 ">
             <v-row>
               <v-col>
                 <h1 class="display-2  mb-3">
@@ -231,19 +215,8 @@
                 >
               </v-col>
             </v-row>
-          </v-col> -->
+          </v-col>
         </div>
-      </v-col>
-    </v-row>
-    <v-row class="d-flex ma-0 pa-0">
-      <v-col class="d-flex justify-center">
-        <v-btn x-large outlined @click="scan()" class="primary--text btn"
-          >Solve Sudoku</v-btn
-        >
-
-        <v-btn x-large outlined @click="clear()" class="tertiary--text btn"
-          >Clear</v-btn
-        >
       </v-col>
     </v-row>
   </v-container>
@@ -251,11 +224,17 @@
 
 <script>
 export default {
-  name: 'Sudoku',
+  name: 'Main',
 
   data: () => ({
     isMessage: false,
   }),
+
+  created() {
+    if (screen.width <= 2760) {
+      this.$router.push('/m');
+    }
+  },
 
   computed: {
     // /*
@@ -282,7 +261,7 @@ export default {
       },
       set: function(newValue) {
         console.log(newValue);
-        // this.$store.getters.currentBoard[0] = newValue;
+        this.$store.getters.currentBoard[0] = newValue;
       },
     },
     row2: {
@@ -598,11 +577,11 @@ export default {
 }
 input[type='text'],
 select {
-  font-size: 20pt;
+  font-size: 22pt;
   text-align: center;
   padding: 10px;
-  width: 35px;
-  height: 35px;
+  width: 40px;
+  height: 40px;
   margin: 4px;
   display: inline-block;
   border: 1px solid white;

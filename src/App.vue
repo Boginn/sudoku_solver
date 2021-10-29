@@ -1,19 +1,21 @@
 <template>
   <v-app dark>
     <v-main class="bgcolor">
-      <Sudoku />
+      <router-view>
+        <Main />
+      </router-view>
     </v-main>
   </v-app>
 </template>
 
 <script>
-import Sudoku from './components/Sudoku';
+import Main from './views/Main';
 
 export default {
   name: 'App',
 
   components: {
-    Sudoku,
+    Main,
   },
 
   data: () => ({

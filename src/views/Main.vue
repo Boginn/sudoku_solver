@@ -231,7 +231,7 @@ export default {
   }),
 
   created() {
-    if (screen.width <= 2760) {
+    if (screen.width <= 760) {
       this.$router.push('/m');
     }
   },

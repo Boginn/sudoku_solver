@@ -23,7 +23,7 @@
                   >
                 </span>
               </div>
-              <div>
+              <div style="white-space: nowrap">
                 <span v-for="(col, index) in row2" :key="index">
                   <input
                     maxLength="1"
@@ -37,7 +37,7 @@
                   >
                 </span>
               </div>
-              <div>
+              <div style="white-space: nowrap">
                 <span v-for="(col, index) in row3" :key="index">
                   <input
                     maxLength="1"
@@ -53,7 +53,7 @@
               </div>
               <span>&nbsp;</span>
 
-              <div>
+              <div style="white-space: nowrap">
                 <span v-for="(col, index) in row4" :key="index">
                   <input
                     maxLength="1"
@@ -68,7 +68,7 @@
                   >
                 </span>
               </div>
-              <div>
+              <div style="white-space: nowrap">
                 <span v-for="(col, index) in row5" :key="index">
                   <input
                     maxLength="1"
@@ -82,7 +82,7 @@
                   >
                 </span>
               </div>
-              <div>
+              <div style="white-space: nowrap">
                 <span v-for="(col, index) in row6" :key="index">
                   <input
                     maxLength="1"
@@ -99,7 +99,7 @@
 
               <span>&nbsp;</span>
 
-              <div>
+              <div style="white-space: nowrap">
                 <span v-for="(col, index) in row7" :key="index">
                   <input
                     maxLength="1"
@@ -113,7 +113,7 @@
                   >
                 </span>
               </div>
-              <div>
+              <div style="white-space: nowrap">
                 <span v-for="(col, index) in row8" :key="index">
                   <input
                     maxLength="1"
@@ -127,7 +127,7 @@
                   >
                 </span>
               </div>
-              <div>
+              <div style="white-space: nowrap">
                 <span v-for="(col, index) in row9" :key="index">
                   <input
                     maxLength="1"
